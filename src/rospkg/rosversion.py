@@ -126,11 +126,20 @@ def main():
         sys.exit(0)
 
     if args.all:
+        from pyinstrument import Profiler
+
+        profiler = Profiler()
+        profiler.start()
+
         rospack = RosPack()
         for package in rospack.list():
+
             printer(
                 '{}: {}'.format(
                     package, get_version_from_package_name(package)))
+            # code you want to profile
+        profiler.stop()
+        print(profiler.output_text(unicode=True, color=True))
         sys.exit(0)
 
     version = get_version_from_package_name(args.package)

@@ -70,8 +70,7 @@ def list_by_path(manifest_name, path, cache):
     path = os.path.abspath(path)
     basename = os.path.basename
 
-    # for d, dirs, files in os.walk(path, topdown=True, followlinks=True):
-    for d, dirs, files in my_walk(path):
+    for d, dirs, files in os.walk(path, topdown=True, followlinks=True):
         if 'CATKIN_IGNORE' in files:
             del dirs[:]
             continue  # leaf
